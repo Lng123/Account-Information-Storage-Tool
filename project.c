@@ -23,6 +23,8 @@ int main(void) {
     const char *choices[] = { "Save a password", "Find a password", "Password Generator","Quit", 0};
     choice = menu(choices, "> Enter your choice");
     printf("%d", choice);
+
+    return 0;
 }
 
 
