@@ -1,12 +1,9 @@
 #include <stdio.h>
+#include "saverecord.h"
 #define BUFSIZE 256
 #define ISIZE 50
 
-typedef struct {
-    char username[ISIZE];
-    char password[ISIZE];
-    char site[ISIZE];
-}password;
+
 
 int enter_record(const char *prompt1, const char *prompt2, const char *prompt3) {
     char line[BUFSIZE];
@@ -58,9 +55,10 @@ int enter_record(const char *prompt1, const char *prompt2, const char *prompt3) 
 }
 
 /*Print function to print the struct into the file here*/
-
+/*
 int main(void) {
     enter_record("Enter the website\n", "Enter the username\n", "Enter the password\n");
 
     return 0;
 }
+*/
