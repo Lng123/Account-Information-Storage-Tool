@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "saverecord.h"
 #define BUFSIZE 256
 #define ISIZE 50
@@ -21,6 +22,7 @@ int enter_record(const char *prompt1, const char *prompt2, const char *prompt3, 
     char site[ISIZE];
     char username[NSIZE];
     char password[NSIZE];
+    char confirm[NSIZE];
 
     printf("%s", prompt1);
     while(1) {
@@ -54,12 +56,31 @@ int enter_record(const char *prompt1, const char *prompt2, const char *prompt3, 
                         } else {
                             /*Enter encrypt function right here.
                             And then store it into the struct*/
-                            strcpy(prec->username, username);
-                            strcpy(prec->password, password);
-                            strcpy(prec->site, site);
 
-                            printf("%s %s %s", site, username, password);
-                            return 0;
+                            while(1) {
+                                printf("Is this correct?(Y/N)\n");
+                                printf("%s %s %s\n", site, username, password);
+
+                                if (!fgets(line, BUFSIZE, stdin)) {
+                                    clearerr(stdin);
+                                    return 0;
+                                }
+                                sscanf(line, "%[YyNn]", confirm);
+
+                                if (strcmp(confirm, "Y") == 0 || strcmp(confirm, "y") == 0) {
+                                    strcpy(prec->username, username);
+                                    strcpy(prec->password, password);
+                                    strcpy(prec->site, site);
+                                    printf("stored");
+                                    return 0;
+                                }
+
+                                if(strcmp(confirm, "N") == 0 || strcmp(confirm, "n") == 0) {
+                                    printf("cleared");
+                                    clearerr(stdin);
+                                    return 0;
+                                }
+                            }
                         }
                     }
                 }
