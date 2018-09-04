@@ -17,6 +17,7 @@ int main(void) {
     return 0;
 }
 
+
 int enter_record(const char *prompt1, const char *prompt2, const char *prompt3, account *prec) {
     char line[BUFSIZE];
     char site[ISIZE];

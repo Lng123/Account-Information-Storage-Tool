@@ -11,13 +11,15 @@
 
 int menu(const char *choices[], const char *prompt);
 int main(void) {
+    account *record = malloc(sizeof(account));
 
     int choice;
     const char *choices[] = { "Save a password", "Find a password", "Password Generator","Quit", 0};
     choice = menu(choices, "> Enter your choice");
     switch(choice) {
         case 1:
-            enter_record("Enter the website\n", "Enter the username\n", "Enter the password\n");
+            enter_record("Enter the website\n", "Enter the username\n", "Enter the password\n", record);
+            free(record);
             break;
         case 2:
             printf("%d", choice);
