@@ -3,15 +3,18 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "saverecord.h"
+#include "arrangerecord.h"
 #define BUFSIZE 256
 #define ISIZE 50
 #define NSIZE 25
 
 
-int main(void) {
+int saverecordmain(void) {
     account *record = malloc(sizeof(account));
-    enter_record("Enter the website\n", "Enter the username\n", "Enter the password\n", record);
-    store_record(record);
+    while(enter_record("Enter the website\n", "Enter the username\n", "Enter the password\n", record) != 0) {
+        removeSpaces(record);
+        store_record(record);
+    }
     free(record);
 
     return 0;
@@ -35,6 +38,10 @@ int enter_record(const char *prompt1, const char *prompt2, const char *prompt3, 
             clearerr(stdin);
             printf("Invalid. %s\n", prompt1);
         } else {
+			if (site[0] == '@') {
+				return 0;
+			}
+            
             printf("%s", prompt2);
             while(1) {
                 if (!fgets(line, BUFSIZE, stdin)) {
@@ -45,6 +52,10 @@ int enter_record(const char *prompt1, const char *prompt2, const char *prompt3, 
                     clearerr(stdin);
                     printf("Invalid. %s\n", prompt1);
                 } else {
+                    if (username[0] == '@') {
+                        return 0;
+                    }
+
                     printf("%s", prompt3);
                     while(1) {
                         if (!fgets(line, BUFSIZE, stdin)) {
@@ -57,7 +68,9 @@ int enter_record(const char *prompt1, const char *prompt2, const char *prompt3, 
                         } else {
                             /*Enter encrypt function right here.
                             And then store it into the struct*/
-
+                            if (password[0] == '@') {
+                                return 0;
+                            }
                             while(1) {
                                 printf("Is this correct?(Y/N)\n");
                                 printf("%s %s %s\n", site, username, password);
@@ -95,7 +108,7 @@ int enter_record(const char *prompt1, const char *prompt2, const char *prompt3, 
 int store_record(const account *prec) {
     FILE *fp;
 
-    if ((fp = fopen("passwords.txt", "a+")) == 0) {
+    if ((fp = fopen(prec->site, "a+")) == 0) {
         perror("fopen");
         return 1;
     }

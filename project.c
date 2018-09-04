@@ -13,7 +13,6 @@
 
 int menu(const char *choices[], const char *prompt);
 int main(void) {
-    account *record = malloc(sizeof(account));
 
     int choice;
 
@@ -25,12 +24,7 @@ int main(void) {
 	mastermain();
     switch(choice) {
         case 1:
-<<<<<<< HEAD
-            enter_record("Enter the website\n", "Enter the username\n", "Enter the password\n", record);
-            free(record);
-=======
 			saverecordmain();
->>>>>>> password-Aaron-feature
             break;
         case 2:
 			findmain();
