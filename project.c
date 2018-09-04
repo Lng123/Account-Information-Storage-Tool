@@ -2,7 +2,9 @@
 #include <ctype.h> 
 #include <string.h>
 #include <stdlib.h>
+#include "arrangerecord.h"
 #include "saverecord.h"
+#include "masterlogin.h"
 #define BUFSIZE 256
 #define ISIZE 50
 
@@ -14,15 +16,24 @@ int main(void) {
     account *record = malloc(sizeof(account));
 
     int choice;
+
+	
     const char *choices[] = { "Save a password", "Find a password", "Password Generator","Quit", 0};
     choice = menu(choices, "> Enter your choice");
+	
+	
+	mastermain();
     switch(choice) {
         case 1:
+<<<<<<< HEAD
             enter_record("Enter the website\n", "Enter the username\n", "Enter the password\n", record);
             free(record);
+=======
+			saverecordmain();
+>>>>>>> password-Aaron-feature
             break;
         case 2:
-            printf("%d", choice);
+			findmain();
             break;
         case 3:
             printf("%d", choice);
