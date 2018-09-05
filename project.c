@@ -2,9 +2,7 @@
 #include <ctype.h> 
 #include <string.h>
 #include <stdlib.h>
-#include "arrangerecord.h"
 #include "saverecord.h"
-#include "masterlogin.h"
 #define BUFSIZE 256
 #define ISIZE 50
 
@@ -15,19 +13,19 @@ int menu(const char *choices[], const char *prompt);
 int main(void) {
 
     int choice;
-
-	
     const char *choices[] = { "Save a password", "Find a password", "Password Generator","Quit", 0};
     choice = menu(choices, "> Enter your choice");
-	
-	
-	mastermain();
     switch(choice) {
         case 1:
+<<<<<<< HEAD
 			saverecordmain();
+=======
+            enter_record("Enter the website\n", "Enter the username\n", "Enter the password\n", record);
+            free(record);
+>>>>>>> parent of fc320eb... Merge branch 'password-Aaron-feature' into Louis-feature
             break;
         case 2:
-			findmain();
+            printf("%d", choice);
             break;
         case 3:
             printf("%d", choice);
