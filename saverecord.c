@@ -117,7 +117,7 @@ int store_record(const account *prec) {
 
     if (fclose(fp) != 0) {
         perror("fclose");
-        return 2; 
+        return 2;
     }
 
     return 0;
