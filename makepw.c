@@ -8,7 +8,7 @@
 #define ISIZE 50
 #define LINESIZE 256
 int menupw(const char *choices[], const char *prompt);
-void makepw(int length, const char * pass);
+void makepw(int length, char * pass);
 int mode(int num);
 int get_int(const char prompt[], int eof);
 int get_valid_int(const char prompt[], int eof,int min, int max);
@@ -16,7 +16,7 @@ int get_valid_int(const char prompt[], int eof,int min, int max);
 
 
 /* number,caps,specialcharacters*/
-void makepw(int length, const char * pass) {
+void makepw(int length,char * pass) {
     
     int i;
     int test;
@@ -65,16 +65,6 @@ void makepw(int length, const char * pass) {
             printf("%c", password[i]);
         }
         
-        /*
-        for(i = 0; i<length; i++){
-            test = rand() % 3;
-            test2 = mode(test);
-            password[i] = (char)test2;
-        }
-        for(i = 0; i<length; i++){
-            printf("%c", password[i]);
-        }
-        */
     }
     if (modes[0] == 0 && modes[1] == 1 && modes[2] == 0){
         for(i = 0; i<length; i++){
@@ -165,8 +155,8 @@ void makepw(int length, const char * pass) {
             printf("%c", password[i]);
         }
     }
-    printf(pass);
-    pass = password;
+    strcpy(pass,password);
+    printf("\n%s",pass);
 
 }
 
