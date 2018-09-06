@@ -3,16 +3,16 @@
 #include <string.h>
 #include <stdlib.h>
 #include<time.h>
- #include "makepw.h" 
+#include "makepw.h" 
 #define BUFSIZE 256
 #define ISIZE 50
 #define LINESIZE 256
-int menu(const char *choices[], const char *prompt);
-int makepw();
+int menupw(const char *choices[], const char *prompt);
+void makepw(int length, const char * pass);
 int mode(int num);
 int get_int(const char prompt[], int eof);
 int get_valid_int(const char prompt[], int eof,int min, int max);
-
+/*
 int main(void) {
     
     int length;
@@ -20,17 +20,13 @@ int main(void) {
     srand(time(0));
     makepw(length);
     
-    /*
-    printf("%d", length);
-    printf("%d", mode(1));
-    */
     return 0;
 }
-
+*/
 
 
 /* number,caps,specialcharacters*/
-int makepw(int length) {
+void makepw(int length, const char * pass) {
     
     int i;
     int test;
@@ -44,15 +40,15 @@ int makepw(int length) {
     const char *choices2[] = { "Y - Include Number", "N - No Number", 0};
     const char *choices3[] = { "Y - Include specialchar", "N - No Number", 0};
     printf("Enter Y/N\n");
-    caps = menu(choices1, "> Enter your choice\n");
+    caps = menupw(choices1, "> Enter your choice\n");
     if(caps == 'y' || caps == 'Y')
         modes[0] = 1;
     clearerr(stdin);
-    number = menu(choices2, "> Enter your choice\n");
+    number = menupw(choices2, "> Enter your choice\n");
     if(number == 'y' || number == 'Y')
         modes[1] = 1;
     clearerr(stdin);
-    specialchar = menu(choices3, "> Enter your choice\n");
+    specialchar = menupw(choices3, "> Enter your choice\n");
     if(specialchar == 'y' || specialchar == 'Y')
         modes[2] = 1;
     
@@ -65,8 +61,6 @@ int makepw(int length) {
         for(i = 0; i<length; i++){
             printf("%c", password[i]);
         }
-        
-        return 0;
     }
     if (modes[0] == 0 && modes[1] == 0 && modes[2] == 1){
         
@@ -91,7 +85,6 @@ int makepw(int length) {
             printf("%c", password[i]);
         }
         */
-        return 1;
     }
     if (modes[0] == 0 && modes[1] == 1 && modes[2] == 0){
         for(i = 0; i<length; i++){
@@ -182,11 +175,12 @@ int makepw(int length) {
             printf("%c", password[i]);
         }
     }
-    return 0;
+    printf(pass);
+    pass = password;
 
 }
 
-int menu(const char *choices[], const char *prompt){
+int menupw(const char *choices[], const char *prompt){
     char line[BUFSIZE];
   while(1){  
     size_t i;

@@ -5,6 +5,8 @@
 #include "arrangerecord.h"
 #include "saverecord.h"
 #include "masterlogin.h"
+#include "makepw.h" 
+#include<time.h>
 #define BUFSIZE 256
 #define ISIZE 50
 
@@ -15,6 +17,8 @@ int menu(const char *choices[], const char *prompt);
 int main(void) {
 
     int choice;
+    int length;
+    char * pass[BUFSIZE];
 
 	
     const char *choices[] = { "Save a password", "Find a password", "Password Generator","Quit", 0};
@@ -30,6 +34,9 @@ int main(void) {
 			findmain();
             break;
         case 3:
+            length = get_valid_int("Enter a Password Length",0,5,55);
+            srand(time(0));
+            makepw(length,*pass);
             printf("%d", choice);
             break;
     }
