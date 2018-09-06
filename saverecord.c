@@ -4,6 +4,7 @@
 #include <ctype.h>
 #include "saverecord.h"
 #include "arrangerecord.h"
+#include "encryption.h"
 #define BUFSIZE 256
 #define ISIZE 50
 #define NSIZE 25
@@ -82,6 +83,7 @@ int enter_record(const char *prompt1, const char *prompt2, const char *prompt3, 
                                 sscanf(line, "%[YyNn]", confirm);
 
                                 if (strcmp(confirm, "Y") == 0 || strcmp(confirm, "y") == 0) {
+                                    encrypt(password);
                                     strcpy(prec->username, username);
                                     strcpy(prec->password, password);
                                     strcpy(prec->site, site);
