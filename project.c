@@ -18,6 +18,7 @@ int main(void) {
 
     int choice;
     int length;
+    int i;
     char * pass[BUFSIZE];
 
 	
@@ -38,6 +39,10 @@ int main(void) {
             srand(time(0));
             makepw(length,*pass);
             printf("%d", choice);
+            for(i = 0;i<length;i++){
+                printf("%s", pass[i]);
+            }
+            /* printf(pass); */
             break;
     }
 
