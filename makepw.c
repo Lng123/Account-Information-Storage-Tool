@@ -13,19 +13,7 @@ int mode(int num);
 int get_int(const char prompt[], int eof);
 int get_valid_int(const char prompt[], int eof,int min, int max);
 
-int main(void) {
-    
-    int length;
-    length = get_valid_int("Enter a Password Length",0,5,55);
-    srand(time(0));
-    makepw(length);
-    
-    /*
-    printf("%d", length);
-    printf("%d", mode(1));
-    */
-    return 0;
-}
+
 
 
 
