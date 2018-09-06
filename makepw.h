@@ -6,6 +6,6 @@
 
 int get_valid_int(const char prompt[], int eof,int min, int max);
 int get_int(const char prompt[], int eof);
-void makepw(int length, const char * pass);
+void makepw(int length);
 
 #endif

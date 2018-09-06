@@ -18,14 +18,12 @@ int main(void) {
 
     int choice;
     int length;
-    int i;
-    char * pass[BUFSIZE];
 
 	
     const char *choices[] = { "Save a password", "Find a password", "Password Generator","Quit", 0};
     choice = menu(choices, "> Enter your choice");
 	
-	
+	srand(time(0));
 	mastermain();
     switch(choice) {
         case 1:
@@ -36,12 +34,7 @@ int main(void) {
             break;
         case 3:
             length = get_valid_int("Enter a Password Length",0,5,55);
-            srand(time(0));
-            makepw(length,*pass);
-            printf("%d", choice);
-            for(i = 0;i<length;i++){
-                printf("%s", pass[i]);
-            }
+            makepw(length);
             break;
     }
 
