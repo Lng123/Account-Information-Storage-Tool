@@ -29,7 +29,7 @@ int main(void) {
 	mastermain();
     switch(choice) {
         case 1:
-			saverecordmain();
+			saverecordmain(); 
             break;
         case 2:
 			findmain();

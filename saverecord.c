@@ -15,6 +15,7 @@ int saverecordmain(void) {
     while(enter_record("Enter the website\n", "Enter the username\n", "Enter the password\n", record) != 0) {
         removeSpaces(record);
         store_record(record);
+        printf("success");
     }
     free(record);
 
@@ -87,8 +88,8 @@ int enter_record(const char *prompt1, const char *prompt2, const char *prompt3, 
                                     strcpy(prec->username, username);
                                     strcpy(prec->password, password);
                                     strcpy(prec->site, site);
-                                    printf("stored");
-                                    return 0;
+                                    printf("stored %s %s %s\n", prec->site, prec->username, prec->password);
+                                    return 1;
                                 }
 
                                 if(strcmp(confirm, "N") == 0 || strcmp(confirm, "n") == 0) {
