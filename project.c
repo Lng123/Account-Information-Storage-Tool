@@ -18,6 +18,8 @@ int main(void) {
 
     int choice;
     int length;
+    char pass[BUFSIZE];
+    
 
 	
     const char *choices[] = { "Save a password", "Find a password", "Password Generator","Quit", 0};
@@ -34,7 +36,8 @@ int main(void) {
             break;
         case 3:
             length = get_valid_int("Enter a Password Length",0,5,55);
-            makepw(length);
+            makepw(length, pass);
+            printf("\n%s",pass);
             break;
     }
 
