@@ -155,6 +155,7 @@ void makepw(int length,char * pass) {
             printf("%c", password[i]);
         }
     }
+    password[length] = '\0';
     strcpy(pass,password);
     printf("\n%s",pass);
 
