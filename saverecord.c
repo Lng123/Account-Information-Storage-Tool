@@ -2,15 +2,18 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include<time.h>
 #include "saverecord.h"
 #include "arrangerecord.h"
 #include "encryption.h"
+#include "makepw.h" 
 #define BUFSIZE 256
 #define ISIZE 50
 #define NSIZE 25
 
 
 int saverecordmain(void) {
+    
     account *record = malloc(sizeof(account));
     while(enter_record("Enter the website\n", "Enter the username\n", "Enter the password\n", record) != 0) {
         removeSpaces(record);
@@ -28,6 +31,8 @@ int enter_record(const char *prompt1, const char *prompt2, const char *prompt3, 
     char username[NSIZE];
     char password[NSIZE];
     char confirm[NSIZE];
+    char pass[NSIZE];
+    int length;
 
     printf("%s", prompt1);
     while(1) {
@@ -72,6 +77,12 @@ int enter_record(const char *prompt1, const char *prompt2, const char *prompt3, 
                             if (password[0] == '@') {
                                 return 0;
                             }
+                            if (password[0] == 'r' && password[1] == 'd'){
+                                length = get_valid_int("Enter a Password Length",0,5,55);
+                                makepw(length, pass);
+                                printf("louis gay shit %s\n", pass);
+                                strcpy(password, pass);
+                            }
                             while(1) {
                                 printf("Is this correct?(Y/N)\n");
                                 printf("%s %s %s\n", site, username, password);
@@ -88,7 +99,7 @@ int enter_record(const char *prompt1, const char *prompt2, const char *prompt3, 
                                     strcpy(prec->password, password);
                                     strcpy(prec->site, site);
                                     printf("stored");
-                                    return 0;
+                                    return 1;
                                 }
 
                                 if(strcmp(confirm, "N") == 0 || strcmp(confirm, "n") == 0) {
