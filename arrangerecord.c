@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "arrangerecord.h"
+#include "encryption.h"
 
 #define SITENAME_LENGTH 30
 #define CREDENTIAL_LENGTH 20
@@ -10,7 +11,7 @@
 
 int findmain(void) {
 	char line[BUFSIZE];
-	char fname[SITENAME_LENGTH], username[CREDENTIAL_LENGTH], inputPwd[CREDENTIAL_LENGTH];
+	char fname[SITENAME_LENGTH], username[CREDENTIAL_LENGTH];
 	char *pwd;
 
 	/*account *record = malloc(sizeof(account));*/
@@ -40,26 +41,11 @@ int findmain(void) {
 
 
 		}
-		printf("please input your pwd:\n");
-		if (fgets(line, BUFSIZE, stdin)) {
-			sscanf(line, "%s", inputPwd);
-		}
+		
 
 		pwd = findUser(fname, username);
-		if (pwd != 0) {
-			if (checkPwd(pwd, inputPwd) == 1) {
-				printf("%s == %s\n", pwd, inputPwd);
-				free(pwd);
-				break;
-			}
-			else {
-				printf("pwd is incorrect. Try again.\n");
-				free(pwd);
-
-			}
-
-
-		}
+		a = decrypt(pwd);
+		printf("%s", a);
 	}
 
 
@@ -135,6 +121,7 @@ char* findUser(char *fname, char *username) {
 				ptrPwd[j] = line[j + i + 1];
 			}
 		}
+
 		return ptrPwd;
 	}
 	return 0;
