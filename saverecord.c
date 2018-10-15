@@ -88,7 +88,7 @@ int enter_record(const char *prompt1, const char *prompt2, const char *prompt3, 
                                     strcpy(prec->username, username);
                                     strcpy(prec->password, password);
                                     strcpy(prec->site, site);
-                                    printf("stored %s %s %s\n", prec->site, prec->username, prec->password);
+                                    printf("stored %s %s Encrypted Password: %s\n", prec->site, prec->username, prec->password);
                                     return 1;
                                 }
 
