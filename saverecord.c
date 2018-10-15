@@ -109,9 +109,10 @@ int enter_record(const char *prompt1, const char *prompt2, const char *prompt3, 
 
 /*Print function to print the struct into the file here*/
 int store_record(const account *prec) {
+    char path[BUFSIZE] = "./login/";
     FILE *fp;
-
-    if ((fp = fopen(prec->site, "a+")) == 0) {
+    strcat(path, prec->site);
+    if ((fp = fopen(path, "a+")) == 0) {
         perror("fopen");
         return 1;
     }
