@@ -15,7 +15,7 @@ int saverecordmain(void) {
     while(enter_record("Enter the website\n", "Enter the username\n", "Enter the password\n", record) != 0) {
         removeSpaces(record);
         store_record(record);
-        printf("success");
+        printf("success!\n");
     }
     free(record);
 
