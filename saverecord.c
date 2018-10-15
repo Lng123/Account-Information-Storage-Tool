@@ -5,7 +5,8 @@
 #include <time.h>
 #include "saverecord.h"
 #include "arrangerecord.h"
-#include "makepw.h" 
+#include "makepw.h"
+#include "encryption.h" 
 #define BUFSIZE 256
 #define ISIZE 50
 #define NSIZE 25
@@ -17,7 +18,7 @@ int saverecordmain(void) {
 	while (enter_record("Enter the website\n", "Enter the username\n", "Enter the password\n", record) != 0) {
 		removeSpaces(record);
 		store_record(record);
-		printf("success");
+		printf("success!\n");
 	}
 	free(record);
 
@@ -76,14 +77,13 @@ int enter_record(const char *prompt1, const char *prompt2, const char *prompt3, 
 						}
 						else {
 							/*Enter encrypt function right here.
-							And then store it into the struct*/
+							And then store it into the struct.*/
 							if (password[0] == '@') {
 								return 0;
 							}
 							if (password[0] == 'r' && password[1] == 'd') {
 								length = get_valid_int("Enter a Password Length", 0, 5, 55);
 								makepw(length, pass);
-								printf("louis gay shit %s\n", pass);
 								strcpy(password, pass);
 							}
 							while (1) {
@@ -104,7 +104,7 @@ int enter_record(const char *prompt1, const char *prompt2, const char *prompt3, 
 								
 										printf("stored %s %s %s\n", prec->site, prec->username, prec->password);
 								
-										printf("stored");
+										printf("stored\n");
 									
 										return 1;
 								}
@@ -126,9 +126,10 @@ int enter_record(const char *prompt1, const char *prompt2, const char *prompt3, 
 
 /*Print function to print the struct into the file here*/
 int store_record(const account *prec) {
+	char path[BUFSIZE] = "./login/";
 	FILE *fp;
-
-	if ((fp = fopen(prec->site, "a+")) == 0) {
+	strcat(path, prec->site);
+	if ((fp = fopen(path, "a+")) == 0) {
 		perror("fopen");
 		return 1;
 	}

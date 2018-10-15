@@ -44,8 +44,8 @@ int findmain(void) {
 		
 
 		pwd = findUser(fname, username);
-		a = decrypt(pwd);
-		printf("%s", a);
+		decrypt(pwd);
+		printf("%s\n", pwd);
 	}
 
 
@@ -87,12 +87,13 @@ int validateSite(char *arr) {
 *	the second input username is required to opent then folder
 */
 char* findUser(char *fname, char *username) {
-
+	char path[BUFSIZE] = "./login/";
 	size_t i, j;
 	FILE* fp;
 	char line[BUFSIZE];
 	char *ptrPwd;
-	if ((fp = fopen(fname, "r+")) == 0) {
+	strcat(path, fname);
+	if ((fp = fopen(path, "r+")) == 0) {
 		perror("fopen");
 		return 0;
 	}
@@ -100,6 +101,7 @@ char* findUser(char *fname, char *username) {
 	while (fgets(line, BUFSIZE, fp)) {
 		for (i = 0; username[i] != '\0'; i++) {
 			if (username[i] != line[i]) {
+				printf("invalid %s %s", username, line);
 				break;
 			}
 		}
